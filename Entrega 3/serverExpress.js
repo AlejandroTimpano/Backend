@@ -5,32 +5,35 @@ const app = express();
 const PORT = 8080;
 const contenedor = new ProductManager3("productos.json");
 
-app.get('/', (req, res) => {
-    res.send('Hi Express Server!')
-});
-
-app.get('/productos', async (req, res) => {
-    const allProducts = await contenedor.getAll();
-    res.json(allProducts);
-});
-
-app.get('/productoRandom', async (req, res) => {
-    const allProducts = await contenedor.getAll();
-    const maxId = allProducts.length;
+app.get("/products", async (req, res) => {
+    const productos = await manager.getProduct();
+    res.send(productos);
+  });
+  
+  app.get("/products/querys", async (req, res) => {
+    const productos = await manager.getProduct();
+    let limite = req.query.limite;
+    console.log(limite);
+    if (limite) {
+      const productosLimitados = productos.slice(0, limite);
+      res.send(productosLimitados);
+    } else {
+      res.send(productos);
+    }
+  });
+  
+  app.get("/products/:id", async (req, res) => {
+    const productos = await manager.getProduct();
+    let id = req.params.id;
+    let filtrado = productos.find((p) => p.id == id);
+    if (filtrado){
+      res.send(filtrado);
+    }
+    else{
+      res.send({"error":"error"});
+    }
+  
     
-    const randomNumber = generateRandomNumber(1, maxId);
-    const randomProduct = await contenedor.getById(randomNumber);
-
-    res.json(randomProduct);
-
-})
-
-const generateRandomNumber = (min, max) => {
-    return Math.floor((Math.random() * (max+1 -min)) +min);
-}
-
-const server = app.listen(PORT, () => {
-    console.log(`>>>> Server started at http://localhost:${PORT}`)
-})
+  });
 
 server.on('error', (error) => console.log(error));
