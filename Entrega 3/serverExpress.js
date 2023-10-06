@@ -6,34 +6,24 @@ const PORT = 8080;
 const contenedor = new ProductManager3("productos.json");
 
 app.get("/products", async (req, res) => {
-    const productos = await manager.getProduct();
-    res.send(productos);
-  });
+    const products = await contenedor.getAll();
+    const { limit } = req.query;
   
-  app.get("/products/querys", async (req, res) => {
-    const productos = await manager.getProduct();
-    let limite = req.query.limite;
-    console.log(limite);
-    if (limite) {
-      const productosLimitados = productos.slice(0, limite);
-      res.send(productosLimitados);
-    } else {
-      res.send(productos);
+    if (limit) {
+      const limitProducts = products.slice(0, limit);
+      return res.send(limitProducts);
+
     }
+    res.send(products);
   });
   
   app.get("/products/:id", async (req, res) => {
-    const productos = await manager.getProduct();
-    let id = req.params.id;
-    let filtrado = productos.find((p) => p.id == id);
-    if (filtrado){
-      res.send(filtrado);
-    }
-    else{
-      res.send({"error":"error"});
-    }
-  
+    const { id } = req.params;
     
+    const product = await contenedor.getById(Number(id));
+    res.send(product);
   });
 
-server.on('error', (error) => console.log(error));
+  app.listen(PORT, () => {
+    console.log(`>>>> Server listening at port http://localhost:${PORT}`)
+});
