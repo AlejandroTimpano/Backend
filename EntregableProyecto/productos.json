@@ -1,42 +1,47 @@
 [
-    {
-        "id": 1,
-        "timestamp": 1648319850314,
-        "title": "Product 1",
-        "price": 10,
-        "description":"Some description for product 1",
-        "code": "XP-1",
-        "image": "someUrlProduct1.com",
-        "stock": 100
-    },
-    {
-        "id": 2,
-        "timestamp": 1648319850314,
-        "title": "Product 2",
-        "price": 20,
-        "description":"Some description for product 2",
-        "code": "XP-2",
-        "image": "someUrlProduct2.com",
-        "stock": 200
-    },
-    {
-        "id": 3,
-        "timestamp": 1648319850314,
-        "title": "Product 31",
-        "price": 30,
-        "description":"Some description for product 3",
-        "code": "XP-3",
-        "image": "someUrlProduct3.com",
-        "stock": 300
-    },
-    {
-        "id": 4,
-        "timestamp": 1648319850314,
-        "title": "Product 4",
-        "price": 40,
-        "description":"Some description for product 4",
-        "code": "XP-4",
-        "image": "someUrlProduct4.com",
-        "stock": 400
-    }
+	{
+		"tittle": "Remera",
+        "description": "100% algodon",
+        "price": "5000",
+        "thumbnail": "https://celadasa.vtexassets.com/arquivos/ids/225838-1200-auto?v=638140622341700000&width=1200&height=auto&aspect=true",
+        "code": "abc001",
+        "stock": "20",
+		"id": "1"
+	},
+	{
+		"tittle": "Buzo",
+        "description": "60% algodon",
+        "price": "15000",
+        "thumbnail": "https://celadasa.vtexassets.com/arquivos/ids/238571-1200-auto?v=638296238682970000&width=1200&height=auto&aspect=true",
+        "code": "abc002",
+        "stock": "10",
+		"id": "2"
+	},
+	{
+		"tittle": "Campera",
+        "description": "80% algodon 20% poliester",
+        "price": "20000",
+        "thumbnail": "https://www.dexter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dwb7b67206/products/ADHC1000/ADHC1000-1.JPG",
+        "code": "abc003",
+        "stock": "5",
+		"id": "3"
+	},
+	{
+		"tittle": "Chomba",
+        "description": "98% algodon",
+        "price": "8000",
+        "thumbnail": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6a7d6fa0280d4d7fabedaec20122a6fe_9366/Camiseta_Titular_Boca_Juniors_22-23_Azul_HE6324_01_laydown.jpg",
+        "code": "abc004",
+        "stock": "6",
+		"id": "4"
+	},
+	{
+		"tittle": "Pelota",
+        "description": "80% Cuero 20% Polimeros",
+        "price": "15000",
+        "thumbnail": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/4e9f4bf4ae664b0798d4ae6201337d82_9366/Pelota_Al_Rihla_League_Blanco_H57791_01_standard.jpg",
+        "code": "abc002",
+        "stock": "4",
+		"id": "5"
+	}
 ]

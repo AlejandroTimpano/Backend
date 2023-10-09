@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const Contenedor = require('./contenedor')
 const contenedor = new Contenedor("productos.json", ["timestamp", "title", "price", "description", "code", "image", "stock"]);
-const carrito = new Contenedor("carrito.json", ["timestamp", "products"])
+const carrito = new Contenedor("carts.json", ["timestamp", "products"])
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -20,18 +20,18 @@ const authMiddleware = app.use((req, res, next) => {
 const routerProducts = express.Router();
 const routerCart = express.Router();
 
-app.use('/api/productos', routerProducts);
-app.use('/api/carrito', routerCart);
+app.use('/api/products', routerProducts);
+app.use('/api/carts', routerCart);
 
 /* ------------------------ Product Endpoints ------------------------ */
 
-// GET api/productos
+// GET api/products
 routerProducts.get('/', async (req, res) => {
     const products = await contenedor.getAll();
     res.status(200).json(products);
 })
 
-// GET api/productos/:id
+// GET api/products/:id
 routerProducts.get('/:id', async (req, res) => {
     const { id } = req.params;
     const product = await contenedor.getById(id);
@@ -41,7 +41,7 @@ routerProducts.get('/:id', async (req, res) => {
         : res.status(400).json({"error": "product not found"})
 })
 
-// POST api/productos
+// POST api/products
 routerProducts.post('/',authMiddleware, async (req,res, next) => {
     const {body} = req;
     
@@ -54,7 +54,7 @@ routerProducts.post('/',authMiddleware, async (req,res, next) => {
         : res.status(400).json({"error": "invalid key. Please verify the body content"})
 })
 
-// PUT api/productos/:id
+// PUT api/products/:id
 routerProducts.put('/:id', authMiddleware ,async (req, res, next) => {
     const {id} = req.params;
     const {body} = req;
@@ -66,7 +66,7 @@ routerProducts.put('/:id', authMiddleware ,async (req, res, next) => {
 })
 
 
-// DELETE /api/productos/:id
+// DELETE /api/products/:id
 routerProducts.delete('/:id', authMiddleware, async (req, res, next) => {
     const {id} = req.params;
     const wasDeleted = await contenedor.deleteById(id);
@@ -103,8 +103,8 @@ routerCart.delete('/:id', async (req, res) => {
         : res.status(404).json({"error": "cart not found"})
 })
 
-// POST /api/carrito/:id/productos
-routerCart.post('/:id/productos', async(req,res) => {
+// POST /api/carts/:cid
+routerCart.post('/:api/carts/:cid', async(req,res) => {
     const {id} = req.params;
     const { body } = req;
     
@@ -120,8 +120,8 @@ routerCart.post('/:id/productos', async(req,res) => {
     }
 })
 
-// GET /api/carrito/:id/productos
-routerCart.get('/:id/productos', async(req, res) => {
+// GET /api/carts/:cid
+routerCart.get('/:api/carts/:cid', async(req, res) => {
     const { id } = req.params;
     const cart = await carrito.getById(id)
     
@@ -130,8 +130,8 @@ routerCart.get('/:id/productos', async(req, res) => {
         : res.status(404).json({"error": "cart not found"})
 })
 
-// DELETE /api/carrito/:id/productos/:id_prod
-routerCart.delete('/:id/productos/:id_prod', async(req, res) => {
+// DELETE /api/carts/:cid
+routerCart.delete('/:api/carts/:cid', async(req, res) => {
     const {id, id_prod } = req.params;
     const productExists = await contenedor.getById(id_prod);
     if (productExists) {
@@ -144,7 +144,7 @@ routerCart.delete('/:id/productos/:id_prod', async(req, res) => {
     }
 })
 
-const PORT = 8020;
+const PORT = 8080;
 const server = app.listen(PORT, () => {
 console.log(` >>>>> 🚀 Server started at http://localhost:${PORT}`)
 })
