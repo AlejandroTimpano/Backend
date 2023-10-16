@@ -9,11 +9,7 @@ const Contenedor = require('./contenedor')
 const server = http.createServer(app);
 const io = new Server(server);
 
-const contenedor = new Contenedor("productos.json");
-const chat = new Contenedor("chat.json")
-
-
-
+const contenedor = new Contenedor("products.json");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -60,12 +56,12 @@ io.on('connection', async(socket) => {
 })
 
 
-app.get('/productos', async(req, res) => {
+app.get('/products', async(req, res) => {
     const productos = await contenedor.getAll();
     res.render('pages/list', {productos})
 })
 
-app.post('/productos', async(req,res) => {
+app.post('/products', async(req,res) => {
     const {body} = req;
     await contenedor.save(body);
     res.redirect('/');
@@ -76,7 +72,7 @@ app.get('/', (req,res) => {
 })
 
 
-const PORT = 13213;
+const PORT = 8080;
 server.listen(PORT, () => {
     console.log(` >>>>> 🚀 Server started at http://localhost:${PORT}`)
 })
