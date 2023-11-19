@@ -4,23 +4,19 @@
     "products": 20
   },
   {
-    "id": 5,
+    "id": 2,
     "products": 10
   },
   {
-    "id": 6,
+    "id": 3,
     "products": 5
   },
   {
-    "id": 7,
+    "id": 4,
     "products": 6
   },
   {
-    "id": 8,
+    "id": 5,
     "products": 4
-  },
-  {
-    "id": 9,
-    "products": 7
   }
 ]
